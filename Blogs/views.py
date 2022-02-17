@@ -58,7 +58,7 @@ class Register(View):
         if register.is_valid():
             register.save()
             messages.success(request, "Registered Successfully!!")
-            return render(request, "register.html", {'register': emp_register})
+            return HttpResponseRedirect('/accounts/login/')
         else:
             return render(request, "register.html", {'register': register})
 
@@ -70,9 +70,6 @@ class BlogViewSet(viewsets.ModelViewSet):
     search_fields = ['^id', '^title', '^user']
     authentication_classes = [SessionAuthentication]
     permission_classes = [IsAdminUser]
-
-# AIzaSyD-_6IbA6Eb5k5CfaiCRgYs2ypkADvqhmA
-# https://www.googleapis.com/blogger/v3/blogs/2399953/posts?key=AIzaSyD-_6IbA6Eb5k5CfaiCRgYs2ypkADvqhmA
 
 
 @method_decorator(login_required, name='dispatch')
