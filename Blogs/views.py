@@ -1,3 +1,4 @@
+from turtle import pos
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, HttpResponseRedirect
 from rest_framework.authentication import SessionAuthentication
@@ -53,7 +54,6 @@ class Register(View):
         return render(request, "register.html", {'register': emp_register, 'active_signin': 'active'})
 
     def post(self, request):
-        emp_register = Registration_Form()
         register = Registration_Form(request.POST)
         if register.is_valid():
             register.save()
@@ -105,6 +105,9 @@ class AddBlog(View):
         return render(request, 'addblog.html', {'blog_form': emp_blog_form})
 
     def post(self, request):
+        post = request.POST.copy()
+        post['user'] = f'{request.user.id}'
+        request.POST = post
         blog_form = BlogForm(request.POST)
         if blog_form.is_valid():
             blog_form.save()
@@ -126,6 +129,9 @@ class UpdateBlog(View):
         return render(request, 'updateblog.html', {'blog_form': blog_form})
 
     def post(self, request, id):
+        post = request.POST.copy()
+        post['user'] = f'{request.user.id}'
+        request.POST = post
         blog = Blog.objects.get(pk=id)
         blog_form = BlogForm(request.POST, instance=blog)
         if blog_form.is_valid():

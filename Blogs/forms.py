@@ -91,7 +91,6 @@ class BlogForm(forms.ModelForm):
         widgets = {
             'title' : forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'Title'}),
             'content' : forms.Textarea(attrs={'class' : 'form-control', 'placeholder' : 'Content'}),
-            'user' : forms.Select(attrs={'class' : 'form-control'}),
             'urlToImage' : forms.URLInput(attrs={'class' : 'form-control', 'placeholder' : 'Url To Image'})
         }  
         
@@ -106,13 +105,7 @@ class BlogForm(forms.ModelForm):
         if len(inp_content.strip()) == 0:
             raise ValidationError(_("Please Enter Content!!"))
         return inp_content
-
-    def clean_user(self):
-        inp_user = self.cleaned_data.get('user')
-        if inp_user == None:
-            raise ValidationError(_("Please Select User!!"))
-        return inp_user
-
+    
     def clean_urlToImage(self):
         inp_urlToImage = self.cleaned_data.get('urlToImage')
         if inp_urlToImage == None:
