@@ -145,7 +145,7 @@ class DeleteBlog(View):
                 request, "The Page You Are Trying To Visit is Login Protected. ")
             return HttpResponseRedirect('/login/')
         blog = Blog.objects.get(pk=id)
-        # blog.delete()
+        blog.delete()
         messages.success(request, "Blog Deleted Successfully!!")
         return HttpResponseRedirect('/blogs/')
     
