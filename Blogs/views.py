@@ -1,4 +1,3 @@
-from turtle import pos
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, HttpResponseRedirect
 from rest_framework.authentication import SessionAuthentication
